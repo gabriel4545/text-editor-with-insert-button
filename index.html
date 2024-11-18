@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulsante e Editor</title>
+    <style>
+        /* Stile per l'editor di testo */
+        #editor {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            resize: none;
+        }
+        button {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Editor di testo -->
+    <textarea id="editor" placeholder="Scrivi qui..."></textarea>
+    <!-- Pulsante -->
+    <button id="copyButton">Incolla "pippo"</button>
+
+    <script>
+        // Variabile statica
+        const pippo = "pippo";
+
+        // Gestore del clic del pulsante
+        document.getElementById('copyButton').addEventListener('click', () => {
+            const editor = document.getElementById('editor');
+
+            // Posizione corrente del cursore
+            const start = editor.selectionStart;
+            const end = editor.selectionEnd;
+
+            // Testo attuale
+            const text = editor.value;
+
+            // Inserisce "pippo" alla posizione del cursore
+            editor.value = text.slice(0, start) + pippo + text.slice(end);
+
+            // Mantieni il cursore dopo il testo incollato
+            editor.selectionStart = editor.selectionEnd = start + pippo.length;
+
+            // Metti il focus sull'editor
+            editor.focus();
+        });
+    </script>
+</body>
+</html>
